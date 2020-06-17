@@ -1,0 +1,146 @@
+@import "~minireset.css/minireset.css";
+
+body {
+  font-family: sans-serif;
+  color: white;
+}
+
+html, body, #compare-app, .app {
+  height: 100vh;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+}
+
+.middle {
+  flex-grow: 1;
+}
+
+.top-bar, .bottom-bar {
+  height: 50px;
+  background-color: #212121;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.bottom-bar {
+  justify-content: space-between;
+}
+
+.select-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 20px;
+}
+
+.select-container-icon {
+  position: absolute;
+  right: 0;
+}
+
+.select-container svg {
+  * {
+    fill: white;
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  &::-ms-expand {
+    display: none;
+  }
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-size: 16px;
+  color: white;
+  height: 30px;
+  //background-color: red;
+  padding-right: 30px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.middle {
+  overflow: scroll;
+  display: flex;
+  img {
+    margin: auto;
+    &.pixelate {
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+    }
+  }
+}
+
+.button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  opacity: 0.5;
+  height: 50px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.button-active {
+  opacity: 1;
+}
+
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+.labels {
+  display: flex;
+  &:last-child .label {
+    margin-right: 20px;
+  }
+}
+
+.label {
+  display: flex;
+  margin-right: 20px;
+}
+
+.label-key {
+  margin-right: 10px;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+.label-value {
+  display: flex;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.bottom-bar-left {
+  display: flex;
+  margin-right: 20px;
+}
+
+.bottom-bar-right {
+  display: flex;
+}
