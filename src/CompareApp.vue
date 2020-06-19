@@ -13,6 +13,7 @@
     <div class="middle dragscroll">
         <img v-bind:src="this.currentVariant.path"
              v-bind:class="{pixelate: internalPixelate}"
+             v-on:load="imageLoaded = true"
              v-bind:style="{
             height: `${currentImage.height * this.internalScale / 100}px`,
             minHeight: `${currentImage.height * this.internalScale / 100}px`,
@@ -23,7 +24,7 @@
         <div class="bottom-bar">
             <div class="bottom-bar-left">
             <div class="select-container">
-                <select v-model="currentIndex">
+                <select v-model="currentIndex" v-on:change="imageChanged">
                     <option v-for="(image, index) in data" v-bind:value="index">{{image.image_name}}</option>
                 </select>
                 <div class="select-container-icon" v-html="require('!raw-loader!./arrow-down.svg')"></div>
@@ -51,6 +52,7 @@
 
     import dragscroll from 'dragscroll';
     import data from './data.json';
+    import Loader from 'loaderz';
 
     export default {
         data: function () {
@@ -62,6 +64,7 @@
                 internalScale: data.default_scale,
                 zoomOptions: [25, 50, 100, 200, 300, 400],
                 pixelate: true,
+                imageLoaded: false,
             }
         },
         mounted() {
@@ -69,6 +72,12 @@
             this.calculateScale();
         },
         methods: {
+            imageChanged() {
+                this.imageLoaded = false;
+                this.currentVariantIndex = 0;
+                this.calculateScale();
+                this.scale = 'fit';
+            },
             setCurrentVariantIndex(index) {
                 this.currentVariantIndex = index;
             },
@@ -78,7 +87,16 @@
                 } else {
                     this.internalScale = this.scale;
                 }
-            }
+            },
+            preloadImages() {
+                let loader = new Loader();
+                for (let [index, image] of this.currentImage.variants.entries()) {
+                    if (index !== 0) {
+                        loader.queue('image', image.path);
+                    }
+                }
+                loader.start();
+            },
         },
         computed: {
             currentImage: function () {
@@ -88,17 +106,18 @@
                 return this.data[this.currentIndex].variants[this.currentVariantIndex]
             },
             internalPixelate: function () {
-                return this.pixelate && this.currentVariant.pixelate !== false;
+                return this.pixelate && this.currentVariant.pixelate !== false && this.internalScale >= 100;
             }
         },
         watch: {
-            currentImage: function (val) {
-                this.currentVariantIndex = 0;
-                this.calculateScale();
-            },
             scale: function (val) {
                 this.calculateScale();
             },
+            imageLoaded: function (val) {
+                if (val === true) {
+                    this.preloadImages();
+                }
+            }
         },
     }
 </script>

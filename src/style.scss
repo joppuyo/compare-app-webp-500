@@ -44,6 +44,7 @@ html, body, #compare-app, .app {
 .select-container-icon {
   position: absolute;
   right: 0;
+  pointer-events: none;
 }
 
 .select-container svg {
@@ -72,7 +73,7 @@ select {
 }
 
 .middle {
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   img {
     margin: auto;

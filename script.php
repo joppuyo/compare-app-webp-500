@@ -55,7 +55,7 @@ foreach ($data as $image) {
     $original['labels'] = [];
     array_push($original['labels'], [
         'key' => 'Size',
-        'value' => round($image['originalSize'] / 1000) . ' KB',
+        'value' => '–',
     ]);
     array_push($original['labels'], [
         'key' => 'Change',

@@ -16,6 +16,7 @@
     "extract-loader": "^2.0.1",
     "file-loader": "^1.1.11",
     "focus-visible": "^5.1.0",
+    "loaderz": "^1.2.0",
     "mini-css-extract-plugin": "^0.4.5",
     "minireset.css": "0.0.6",
     "node-sass": "^4.13.1",
