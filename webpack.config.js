@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin =require('html-webpack-plugin');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WatchTimePlugin = require('webpack-watch-time-plugin');
 const cssnano = require('cssnano');
@@ -11,7 +13,7 @@ module.exports = (env, argv) => {
             script: './src/script.js',
         },
         output: {
-            filename: '[name].js',
+            filename: '[name].js?ver=[hash]',
             chunkFilename: '[name].js?ver=[chunkhash]',
         },
         resolve: {
@@ -70,11 +72,15 @@ module.exports = (env, argv) => {
         },
         plugins: [
             new MiniCssExtractPlugin({
-                filename: '[name].css',
-                chunkFilename: '[id].css',
+                filename: '[name].css?ver=[hash]',
+                chunkFilename: '[id].css?ver=[chunkhash]',
             }),
             new WatchTimePlugin(),
             new VueLoaderPlugin(),
+            new HtmlWebpackPlugin({
+                filename: '../index.html',
+                template: './src/index.ejs'
+            }),
         ],
     };
 
