@@ -60,13 +60,12 @@ select {
   &::-ms-expand {
     display: none;
   }
-  background: transparent;
   border: 0;
   border-radius: 0;
   font-size: 16px;
   color: white;
   height: 30px;
-  //background-color: red;
+  background-color: #212121;
   padding-right: 30px;
   padding-left: 10px;
   cursor: pointer;
@@ -144,4 +143,15 @@ select {
 
 .bottom-bar-right {
   display: flex;
+}
+
+.bottom-bar {
+  &::-webkit-scrollbar {
+    height: 8px;
+    -webkit-appearance: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(255,255,255,.25);
+  }
 }
